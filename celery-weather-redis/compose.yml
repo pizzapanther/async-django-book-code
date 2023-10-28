@@ -1,7 +1,7 @@
 version: "3.9"
 
 services:
-    web:
+    django:
         build:
             context: .
             dockerfile: Dockerfile
@@ -23,7 +23,6 @@ services:
             - ALLOW_EMPTY_PASSWORD=yes
     postgresql:
         image: postgis/postgis:15-master
-        restart: always
         volumes:
             - "$HOME/pgdata/celery-weather-redis:/var/lib/postgresql/data"
         environment:

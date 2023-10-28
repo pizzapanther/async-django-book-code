@@ -3,7 +3,9 @@ FROM bitnami/minideb:bookworm
 RUN mkdir /app
 WORKDIR /app
 
-RUN install_packages python3-full redis-tools
+RUN install_packages python3-full pipx redis-tools
 
-RUN curl -s https://bootstrap.pypa.io/get-pip.py | python3
-RUN pip3 install pdm pdm-django toml
+ENV HOME /root
+RUN pipx ensurepath
+RUN pipx install pdm
+RUN pipx inject pdm pdm-django
