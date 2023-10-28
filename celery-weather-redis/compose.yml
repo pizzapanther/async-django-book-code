@@ -1,0 +1,32 @@
+version: "3.9"
+
+services:
+    web:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        command: /bin/bash
+        volumes:
+            - .:/app
+        ports:
+            - 8000:8000
+        links:
+            - postgresql:db-local
+            - redis:redis-local
+        depends_on:
+            - redis
+            - postgresql
+        shm_size: 4gb
+    redis:
+        image: 'bitnami/redis:latest'
+        environment:
+            - ALLOW_EMPTY_PASSWORD=yes
+    postgresql:
+        image: postgis/postgis:15-master
+        restart: always
+        volumes:
+            - "$HOME/pgdata/celery-weather-redis:/var/lib/postgresql/data"
+        environment:
+            - POSTGRES_DB=asyncdj
+            - POSTGRES_USER=postgres
+            - POSTGRES_PASSWORD=passyword
