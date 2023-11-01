@@ -5,7 +5,11 @@ description = ""
 authors = [
     {name = "Paul Bailey", email = "paul@neutron.studio"},
 ]
-dependencies = []
+dependencies = [
+    "django>=4.2.7",
+    "celery>=5.3.4",
+    "redis>=5.0.1",
+]
 requires-python = ">=3.11"
 readme = "README.md"
 license = {text = "BSDv3"}
