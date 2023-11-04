@@ -9,6 +9,8 @@ dependencies = [
     "django>=4.2.7",
     "celery>=5.3.4",
     "redis>=5.0.1",
+    "dj-database-url>=2.1.0",
+    "psycopg2-binary>=2.9.9",
 ]
 requires-python = ">=3.11"
 readme = "README.md"
