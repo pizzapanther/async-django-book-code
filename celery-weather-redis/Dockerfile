@@ -18,3 +18,6 @@ ENV HOME /home/asyncdj
 RUN pipx ensurepath
 RUN pipx install pdm
 RUN pipx inject pdm pdm-django
+
+RUN ln -s /app/.bash_history /home/asyncdj/.bash_history
+RUN ln -s /app/.python_history /home/asyncdj/.python_history
