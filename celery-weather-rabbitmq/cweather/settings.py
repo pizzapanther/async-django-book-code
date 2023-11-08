@@ -123,18 +123,11 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-CACHES = {
-    "default": {
-        "BACKEND": "django.core.cache.backends.redis.RedisCache",
-        "LOCATION": os.environ.get("CACHE_URL", "redis://localhost:6379/0"),
-    }
-}
-
-CELERY_RESULT_BACKEND = os.environ.get("RESULTS_URL", "redis://localhost:6379/2")
+CELERY_RESULT_BACKEND = os.environ.get("RESULTS_URL", "rpc://bugs:passyword@localhost:5672/asyncdj")
 CELERY_RESULT_EXTENDED = True
 
 CELERY_TIMEZONE = "UTC"
 CELERY_TASK_TRACK_STARTED = True
 CELERY_TASK_TIME_LIMIT = 60
 
-CELERY_BROKER_URL = os.environ.get("BROKER_URL", "redis://localhost:6379/1")
+CELERY_BROKER_URL = os.environ.get("BROKER_URL", "amqp://bugs:passyword@localhost:5672/asyncdj")
