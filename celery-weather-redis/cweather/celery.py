@@ -18,13 +18,13 @@ app.config_from_object('django.conf:settings', namespace='CELERY')
 app.autodiscover_tasks()
 
 app.conf.beat_schedule = {
-    'add-every-10-minutes': {
-        'task': 'djstorm.tasks.fetch_weather',
-        'schedule': crontab(minute='0,10,20,30,40,50'),
-        'args': (52.13, 13.14)
-    },
+  'add-every-10-minutes': {
+    'task': 'djstorm.tasks.fetch_weather',
+    'schedule': crontab(minute='0,10,20,30,40,50'),
+    'args': (52.13, 13.14)
+  },
 }
 
 @app.task(bind=True, ignore_result=True)
 def debug_task(self):
-    print(f'Request: {self.request!r}')
+  print(f'Request: {self.request!r}')
