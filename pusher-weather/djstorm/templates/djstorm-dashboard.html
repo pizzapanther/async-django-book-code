@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <head>
-  <title>Pusher Test</title>
+  <title>Pusher Weather</title>
 </head>
 <body>
-  <h1>Pusher Test</h1>
+  <h1>Pusher Weather</h1>
   <p>
     Publish an event to channel <code>my-channel</code>
     with event name <code>my-event</code>; it will appear below:
@@ -22,10 +22,9 @@
     // Enable pusher logging - don't include this in production
     Pusher.logToConsole = true;
 
-    var pusher = new Pusher('FRONTENDKEY', {cluster: 'CLUSTER'});
-
-    var channel = pusher.subscribe('my-channel');
-    channel.bind('my-event', function(data) {
+    var pusher = new Pusher('{{ pusher_key }}', {cluster: '{{ pusher_cluster }}'});
+    var channel = pusher.subscribe('{{ channel }}');
+    channel.bind("current-weather", function(data) {
       app.messages.push(JSON.stringify(data));
     });
 

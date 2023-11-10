@@ -1,23 +1,15 @@
-import datetime
-
-from django import http
-from django.utils import timezone
+from django.conf import settings
+from django.template.response import TemplateResponse
 
 from djstorm.models import WeatherPoint
-from djstorm.tasks import fetch_weather
 
 
 def current_weather(request, lat, lng):
   wp = WeatherPoint.objects.filter(point=f"{lat},{lng}").first()
-  old = timezone.now() - datetime.timedelta(minutes=15)
-
-  if wp is None or wp.created <= old:
-    print("Using Celery Task Data")
-    async_result = fetch_weather.delay(lat, lng)
-    data = async_result.get()
-
-  else:
-    print("Using Model Data")
-    data = wp.weather_data
-
-  return http.JsonResponse(data["current"])
+  context = {
+    'pusher_key': settings.PUSHER_KEY,
+    'pusher_cluster': settings.PUSHER_CLUSTER,
+    'weather_point': wp,
+    'channel': f"{lat},{lng}",
+  }
+  return TemplateResponse(request, "djstorm-dashboard.html", context)

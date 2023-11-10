@@ -22,7 +22,7 @@ services:
         image: postgis/postgis:15-master
         network_mode: host
         volumes:
-            - "$HOME/pgdata/celery-weather-redis:/var/lib/postgresql/data"
+            - "$HOME/pgdata/pusher-weather:/var/lib/postgresql/data"
         environment:
             - POSTGRES_DB=asyncdj
             - POSTGRES_USER=postgres

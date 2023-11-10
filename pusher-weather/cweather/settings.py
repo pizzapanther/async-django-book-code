@@ -138,3 +138,19 @@ CELERY_TASK_TRACK_STARTED = True
 CELERY_TASK_TIME_LIMIT = 60
 
 CELERY_BROKER_URL = os.environ.get("BROKER_URL", "redis://localhost:6379/1")
+
+PUSHER_APP_ID = os.environ["PUSHER_APP_ID"]
+PUSHER_KEY = os.environ["PUSHER_KEY"]
+PUSHER_SECRET = os.environ["PUSHER_SECRET"]
+PUSHER_CLUSTER = os.environ["PUSHER_CLUSTER"]
+
+WEATHER_LOCATIONS = [
+    {
+        "name": "Germany",
+        "location": (52.13, 13.14)
+    },
+    {
+        "name": "Canyon Lake, TX",
+        "location": (29.89, -98.25)
+    },
+]

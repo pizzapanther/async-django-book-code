@@ -1,8 +1,16 @@
 import httpx
+import pusher
 
 from celery import shared_task
 
+from django.conf import settings
+
 from djstorm.models import WeatherPoint
+
+@shared_task
+def fetch_all():
+  for location in settings.WEATHER_LOCATIONS:
+    fetch_weather.delay(*location["location"])
 
 
 @shared_task
@@ -16,5 +24,14 @@ def fetch_weather(lat, lng):
 
   wpoint = WeatherPoint(point=f"{lat},{lng}", weather_data=data)
   wpoint.save()
+
+  pusher_client = pusher.Pusher(
+    app_id=settings.PUSHER_APP_ID,
+    key=settings.PUSHER_KEY,
+    secret=settings.PUSHER_SECRET,
+    cluster=settings.PUSHER_CLUSTER,
+    ssl=True
+  )
+  pusher_client.trigger(f"{lat},{lng}", "current-weather", data["current"])
 
   return data
