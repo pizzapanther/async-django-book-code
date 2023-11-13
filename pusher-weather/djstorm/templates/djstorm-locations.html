@@ -1,0 +1,23 @@
+<!DOCTYPE html>{% load static %}
+<html>
+  <head>
+    <title>Pusher Weather Locations</title>
+    <style>
+      li {
+        font-size: 150%;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Pusher Weather Locations</h1>
+    <ul>
+      {% for l in locations %}
+      <li>
+        <a href="./{{ l.location.0 }},{{ l.location.1 }}/">{{ l.name }}</a>
+        <br><br>
+      </li>
+      {% endfor %}
+    </ul>
+  </body>
+</html>

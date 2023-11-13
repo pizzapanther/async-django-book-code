@@ -1,4 +1,7 @@
+from functools import cached_property
+
 from django.db import models
+from django.conf import settings
 
 
 class WeatherPoint(models.Model):
@@ -11,3 +14,10 @@ class WeatherPoint(models.Model):
 
   def __str__(self):
     return self.point
+
+  @cached_property
+  def location(self):
+    for l in settings.WEATHER_LOCATIONS:
+      key = "{},{}".format(*l['location'])
+      if key == self.point:
+        return l['name']
