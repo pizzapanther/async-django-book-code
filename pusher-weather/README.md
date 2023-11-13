@@ -1,4 +1,4 @@
-# Celery Weather Redis Project
+# Pusher Weather Project
 
 ## Usage
 
