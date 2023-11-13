@@ -18,9 +18,9 @@ app.config_from_object('django.conf:settings', namespace='CELERY')
 app.autodiscover_tasks()
 
 app.conf.beat_schedule = {
-  'add-every-10-minutes': {
+  'add-every-15-minutes': {
     'task': 'djstorm.tasks.fetch_all',
-    'schedule': crontab(minute='0,10,20,30,40,50'),
+    'schedule': crontab(minute='0,15,30,45'),
   },
 }
 
