@@ -2,6 +2,17 @@
 
 ## Usage
 
+Store your Pusher secrets and configuration in a `.env` in this directory.
+
+```
+PUSHER_APP_ID=123456
+PUSHER_KEY=ahsjhfjksdhfkdjfklj
+PUSHER_SECRET=kdfjkdjfkdjfkdjfkdjfkjdfkj
+PUSHER_CLUSTER=us3
+```
+
+The use the container like shown below.
+
 ```
 # Build container
 docker compose build --build-arg userid=$(id -u) --build-arg groupid=$(id -g)
