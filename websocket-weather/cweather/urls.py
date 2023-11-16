@@ -22,5 +22,4 @@ import djstorm.views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path(r"weather/", djstorm.views.locations),
-    re_path(r"weather/(-?\d{1,3}.\d{2}),(-?\d{1,3}.\d{2})/", djstorm.views.current_weather),
 ]
