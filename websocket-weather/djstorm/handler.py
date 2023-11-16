@@ -77,7 +77,7 @@ class WebSocketHandler:
 
     await self.on_close()
 
-def websocket_application():
+def get_websocket_application():
   from django.core.asgi import get_asgi_application
   http_app = get_asgi_application()
 
