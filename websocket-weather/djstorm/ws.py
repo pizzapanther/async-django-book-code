@@ -7,8 +7,6 @@ class WeatherSocket(WebSocketHandler):
 
   async def on_message(self, data):
     print('MESSAGES', data)
-    if data == 'close':
-      await self.close()
 
   async def on_close(self):
     print("CLOSED")

@@ -43,7 +43,8 @@ class WebSocketHandler:
     await self.on_message(data)
 
   def load_data(self, msg):
-    return json.loads(msg['text'])
+    if 'text' in msg and msg['text']:
+      return json.loads(msg['text'])
 
   async def close(self, code=1000):
     self.closed = True
