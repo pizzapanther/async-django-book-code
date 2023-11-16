@@ -17,8 +17,8 @@ class WebSocketRequest(ASGIRequest):
 class WebSocketHandler:
   def __init__(self, request, receive, send):
     self.request = request
-    self.receive = receive
-    self.send = send
+    self._receive = receive
+    self._send = send
 
     self.connected = False
     self.closed = False
@@ -36,7 +36,7 @@ class WebSocketHandler:
     pass
 
   async def accept_connection(self):
-    await self.send({'type': 'websocket.accept'})
+    await self._send({'type': 'websocket.accept'})
 
   async def process_message(self, msg):
     data = self.load_data(msg)
@@ -47,12 +47,12 @@ class WebSocketHandler:
 
   async def close(self, code=1000):
     self.closed = True
-    await self.send({'type': 'websocket.close', 'code': code})
+    await self._send({'type': 'websocket.close', 'code': code})
 
   async def run_loop(self):
     try:
       while 1:
-        msg = await self.receive()
+        msg = await self._receive()
 
         if msg['type'] == 'websocket.connect':
           await self.accept_connection()
