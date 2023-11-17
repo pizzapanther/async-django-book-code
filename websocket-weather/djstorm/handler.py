@@ -1,7 +1,11 @@
 import asyncio
 import datetime
 import importlib
+import logging
 import json
+import traceback
+
+logger = logging.getLogger(__name__)
 
 from django.conf import settings
 from django.core.handlers.asgi import ASGIRequest
@@ -67,7 +71,13 @@ class WebSocketHandler:
     if callback:
       task.add_done_callback(callback)
 
+    task.add_done_callback(self.log_tasks_exceptions)
     self.tasks[task_id] = task
+
+  def log_tasks_exceptions(self, task):
+    error = task.exception()
+    if error:
+      logger.error("".join(traceback.format_exception(error)))
 
   def cancel_tasks(self):
     for task_id, task in self.tasks.items():

@@ -35,6 +35,7 @@ function load_app () {
     var data = JSON.parse(msg.data);
     if (data.weather) {
       weather.value = data.weather;
+      console.log('Loaded Weather:', data.weather);
     } else {
       console.log('Unhandled Message:', data);
     }

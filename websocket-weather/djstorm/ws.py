@@ -1,5 +1,5 @@
 from .handler import WebSocketHandler
-
+from djstorm.models import WeatherPoint
 
 class WeatherSocket(WebSocketHandler):
   async def on_open(self):
@@ -21,8 +21,11 @@ class WeatherSocket(WebSocketHandler):
     print(error)
 
   async def _send_weather(self):
-    #wp = WeatherPoint.objects.filter(point=f"{lat},{lng}").first()
-    await self.send({"narf": 1})
+    if self.current_location:
+      wp = await WeatherPoint.objects.filter(point=self.current_location).afirst()
+      if wp:
+        await self.send({"weather": wp.weather_data['current']})
 
   async def send_weather(self):
-    await self.sleep_loop(self._send_weather, 5)
+    await self._send_weather()
+    await self.sleep_loop(self._send_weather, 60 * 3)
