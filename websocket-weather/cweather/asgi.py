@@ -11,6 +11,6 @@ import os
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'cweather.settings')
 
-from djstorm.handler import get_websocket_application
+from django_ws import get_websocket_application
 
 application = get_websocket_application()

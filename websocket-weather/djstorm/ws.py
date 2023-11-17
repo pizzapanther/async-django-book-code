@@ -1,5 +1,6 @@
-from .handler import WebSocketHandler
+from django_ws import WebSocketHandler
 from djstorm.models import WeatherPoint
+
 
 class WeatherSocket(WebSocketHandler):
   async def on_open(self):
@@ -8,6 +9,9 @@ class WeatherSocket(WebSocketHandler):
 
   async def on_message(self, data):
     if 'location' in data:
+      # if 'send_weather' in self.tasks:
+      #   self.tasks['send_weather'].cancel()
+
       self.current_location = "{},{}".format(*data['location'])
       self.start_task('send_weather', self.send_weather)
 
@@ -18,12 +22,13 @@ class WeatherSocket(WebSocketHandler):
     print("Connection Closed, Tasks Cancelled")
 
   async def on_error(self, error):
-    print(error)
+    print("ERROR", error)
 
   async def _send_weather(self):
     if self.current_location:
       wp = await WeatherPoint.objects.filter(point=self.current_location).afirst()
       if wp:
+        print("SENIDNG", wp.weather_data['current'])
         await self.send({"weather": wp.weather_data['current']})
 
   async def send_weather(self):

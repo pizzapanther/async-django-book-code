@@ -5,7 +5,7 @@
 groups = ["default"]
 strategy = ["cross_platform"]
 lock_version = "4.4"
-content_hash = "sha256:f77394fbeceb0f58f2c89714d656b98518f82a7f4cb0982f27bb482f10961c79"
+content_hash = "sha256:d8011abc49b5c9a4ed31d5e860fa746473a099b9be6270d9abeff5632cbb655e"
 
 [[package]]
 name = "amqp"
@@ -183,6 +183,16 @@ dependencies = [
 files = [
     {file = "Django-4.2.7-py3-none-any.whl", hash = "sha256:e1d37c51ad26186de355cbcec16613ebdabfa9689bbade9c538835205a8abbe9"},
     {file = "Django-4.2.7.tar.gz", hash = "sha256:8e0f1c2c2786b5c0e39fe1afce24c926040fad47c8ea8ad30aaf1188df29fc41"},
+]
+
+[[package]]
+name = "django-ws"
+version = "0.6.0"
+requires_python = ">=3.10"
+summary = "Helpers for using WebSockets in Django"
+files = [
+    {file = "django_ws-0.6.0-py3-none-any.whl", hash = "sha256:97a8749bb961f5377833f751eca95033bcba6e7f70ec5cfec1fef2bb5231a522"},
+    {file = "django_ws-0.6.0.tar.gz", hash = "sha256:d50b00dd912670bfd9993fc41a2ad1bb320f20f6b0f138e5c3d664fe2de12881"},
 ]
 
 [[package]]
