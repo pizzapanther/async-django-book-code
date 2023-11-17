@@ -1,3 +1,5 @@
+import asyncio
+import datetime
 import importlib
 import json
 
@@ -5,6 +7,10 @@ from django.conf import settings
 from django.core.handlers.asgi import ASGIRequest
 from django.urls import resolve
 from django.urls.exceptions import Resolver404
+from django.utils import timezone
+
+TASK_DUPLICATE_STARTED = "task-duplicate-started"
+TASK_WS_CLOSED = "task-websocket-closed"
 
 
 class WebSocketRequest(ASGIRequest):
@@ -15,6 +21,8 @@ class WebSocketRequest(ASGIRequest):
 
 
 class WebSocketHandler:
+  LOOP_SLEEP_TIME = 0.3
+
   def __init__(self, request, receive, send):
     self.request = request
     self._receive = receive
@@ -22,6 +30,49 @@ class WebSocketHandler:
 
     self.connected = False
     self.closed = False
+    self.tasks = {}
+
+  async def sleep_loop(self, coroutine, cadence, *args, **kwargs):
+    last_called = timezone.now()
+
+    while 1:
+      now = timezone.now()
+      diff = (now - last_called).total_seconds()
+      if diff >= cadence:
+        await coroutine(*args, **kwargs)
+        last_called = now
+
+      await asyncio.sleep(self.LOOP_SLEEP_TIME)
+
+  async def _ping(self):
+    await self.send({'ping': timezone.now().isoformat()})
+
+  async def ping(self):
+    await self.sleep_loop(self._ping, 59)
+
+  def start_ping(self):
+    self.start_task('ping', self.ping)
+
+  def start_task(self, task_id, coroutine, callback=None, args=None, kwargs=None):
+    if args is None:
+      args = []
+
+    if kwargs is None:
+      kwargs = {}
+
+    if task_id in self.tasks and not self.tasks[task_id].done():
+      self.tasks[task_id].cancel(msg=TASK_DUPLICATE_STARTED)
+
+    task = asyncio.create_task(coroutine(*args, **kwargs))
+    if callback:
+      task.add_done_callback(callback)
+
+    self.tasks[task_id] = task
+
+  def cancel_tasks(self):
+    for task_id, task in self.tasks.items():
+      if not task.done():
+        task.cancel(msg=TASK_WS_CLOSED)
 
   async def on_open(self):
     pass
@@ -37,6 +88,9 @@ class WebSocketHandler:
 
   async def accept_connection(self):
     await self._send({'type': 'websocket.accept'})
+
+  async def send(self, data):
+    await self._send({'type': 'websocket.send', 'text': json.dumps(data)})
 
   async def process_message(self, msg):
     data = self.load_data(msg)
@@ -76,6 +130,7 @@ class WebSocketHandler:
       await self.on_error(error)
       raise
 
+    self.cancel_tasks()
     await self.on_close()
 
 def get_websocket_application():

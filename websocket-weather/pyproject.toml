@@ -15,6 +15,7 @@ dependencies = [
     "honcho>=1.1.0",
     "setuptools>=68.2.2",
     "uvicorn[standard]>=0.24.0.post1",
+    "whitenoise>=6.6.0",
 ]
 requires-python = ">=3.11"
 readme = "README.md"
