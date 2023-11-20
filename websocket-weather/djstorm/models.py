@@ -15,6 +15,10 @@ class WeatherPoint(models.Model):
   def __str__(self):
     return self.point
 
+  @property
+  def slug(self):
+    return "wp" + self.point.replace(",", "").replace(".", "")
+
   @cached_property
   def location(self):
     for l in settings.WEATHER_LOCATIONS:

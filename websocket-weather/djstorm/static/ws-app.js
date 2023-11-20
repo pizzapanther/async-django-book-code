@@ -27,11 +27,11 @@ function load_app () {
     ws.send(JSON.stringify({"location": l.location}));
   }
 
-  ws.onopen = () => {
+  ws.addEventListener("open", (event) => {
     console.log("WebSocket opened");
-  }
+  });
 
-  ws.onmessage = (msg) => {
+  ws.addEventListener("message", (msg) => {
     var data = JSON.parse(msg.data);
     if (data.weather) {
       weather.value = data.weather;
@@ -39,11 +39,11 @@ function load_app () {
     } else {
       console.log('Unhandled Message:', data);
     }
-  }
+  });
 
-  ws.onclose = () => {
+  ws.addEventListener("close", (event) => {
     console.log("WebSocket closed");
-  }
+  });
 
   Vue.createApp({
     setup() {

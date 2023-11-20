@@ -9,8 +9,8 @@ class WeatherSocket(WebSocketHandler):
 
   async def on_message(self, data):
     if 'location' in data:
-      # if 'send_weather' in self.tasks:
-      #   self.tasks['send_weather'].cancel()
+      if 'send_weather' in self.tasks:
+        self.tasks['send_weather'].cancel()
 
       self.current_location = "{},{}".format(*data['location'])
       self.start_task('send_weather', self.send_weather)

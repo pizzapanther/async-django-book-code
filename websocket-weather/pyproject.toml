@@ -10,13 +10,13 @@ dependencies = [
     "celery>=5.3.4",
     "redis>=5.0.1",
     "dj-database-url>=2.1.0",
-    "psycopg2-binary>=2.9.9",
     "httpx>=0.25.1",
     "honcho>=1.1.0",
     "setuptools>=68.2.2",
     "uvicorn[standard]>=0.24.0.post1",
     "whitenoise>=6.6.0",
     "django-ws>=0.1.0",
+    "psycopg[binary,pool]>=3.1.13",
 ]
 requires-python = ">=3.11"
 readme = "README.md"
