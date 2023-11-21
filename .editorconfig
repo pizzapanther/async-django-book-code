@@ -1,0 +1,34 @@
+# https://editorconfig.org/
+
+root = true
+
+[*]
+indent_style = space
+indent_size = 2
+insert_final_newline = true
+trim_trailing_whitespace = true
+end_of_line = lf
+charset = utf-8
+
+[*.py]
+max_line_length = 80
+
+[*.html]
+printWidth = 80
+indent_size = 2
+
+[*.vue]
+printWidth = 80
+indent_size = 2
+
+[*.js]
+printWidth = 80
+indent_size = 2
+
+[*.json]
+printWidth = 80
+indent_size = 2
+
+[*.less]
+printWidth = 80
+indent_size = 2

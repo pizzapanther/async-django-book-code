@@ -1,4 +1,5 @@
-# async-django-book-code
-Full code examples for the book "Async Patterns in Django"
+# Async Patterns in Django Code
+
+This repository contains full code examples for the book "Async Patterns in Django".
 
 todo: table of contents of projects
