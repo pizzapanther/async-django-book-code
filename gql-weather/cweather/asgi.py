@@ -14,7 +14,3 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'cweather.settings')
 from django_ws import get_websocket_application
 
 application = get_websocket_application()
-
-from luna_ws import add_ws_app
-
-application = add_ws_app(application)

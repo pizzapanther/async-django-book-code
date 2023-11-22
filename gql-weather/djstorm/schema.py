@@ -1,8 +1,13 @@
+import asyncio
+
+import graphene
 from graphene import relay
+from graphene.types.generic import GenericScalar
 from graphene_django import DjangoObjectType
 from graphene_django.filter import DjangoFilterConnectionField
 
 from djstorm.models import WeatherPoint
+
 
 class WeatherPointNode(DjangoObjectType):
   class Meta:
@@ -12,6 +17,19 @@ class WeatherPointNode(DjangoObjectType):
       'created': ['gt', 'gte', 'lt', 'lte'],
     }
     interfaces = (relay.Node, )
+
+
+class WeatherSubscription:
+  track_location = GenericScalar(location=graphene.String())
+
+  async def subscribe_track_location(root, info, location):
+    while 1:
+      wp = await WeatherPoint.objects.filter(point=location).afirst()
+      if wp:
+        print("SENIDNG", wp.weather_data['current'])
+        yield wp.weather_data['current']
+
+      await asyncio.sleep(6 * 3)
 
 
 class Query:

@@ -157,3 +157,7 @@ GRAPHENE = {
     'RELAY_CONNECTION_ENFORCE_FIRST_OR_LAST': True,
     'CAMELCASE_ERRORS': False,
 }
+
+WS_MIDDLEWARE = [
+  'cweather.middleware.AuthAsyncMiddleware',
+]

@@ -15,11 +15,11 @@ dependencies = [
     "setuptools>=68.2.2",
     "uvicorn[standard]>=0.24.0.post1",
     "whitenoise>=6.6.0",
-    "django-ws>=0.1.0",
     "psycopg[binary,pool]>=3.1.13",
-    "graphene-luna>=0.3.0",
     "graphene-django>=3.1.5",
     "django-filter>=23.4",
+    "django-ws>=1.0.0",
+    "graphene-luna>=1.0.0",
 ]
 requires-python = ">=3.11"
 readme = "README.md"

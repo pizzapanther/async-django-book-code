@@ -22,7 +22,7 @@ class CountDownSubscription:
       await asyncio.sleep(1)
 
 
-class Subscription(CountDownSubscription, graphene.ObjectType):
+class Subscription(djstorm.schema.WeatherSubscription, CountDownSubscription, graphene.ObjectType):
   pass
 
 schema = graphene.Schema(
