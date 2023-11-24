@@ -31,10 +31,14 @@ function load_app () {
       unsubscribe();
       weather.value = null;
       current_location.value = null;
+      unsubscribe = null;
     }
   }
 
   function on_complete () {
+    weather.value = null;
+    current_location.value = null;
+    unsubscribe = null;
     console.log('Completed');
   }
 
