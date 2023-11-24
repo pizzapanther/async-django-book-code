@@ -29,7 +29,7 @@ class WeatherSubscription:
         print("SENIDNG", wp.weather_data['current'])
         yield wp.weather_data['current']
 
-      await asyncio.sleep(6 * 3)
+      await asyncio.sleep(30)
 
 
 class Query:

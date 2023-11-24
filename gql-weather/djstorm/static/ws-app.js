@@ -2,12 +2,11 @@ function load_app () {
   var locations = JSON.parse(document.getElementById('locations').textContent);
   locations = Vue.ref(locations);
 
-  var ws_url = location.origin.replace("http", "ws") + "/ws";
-  var ws = new WebSocket(ws_url);
-
   var current_location = Vue.ref(null);
   var details = Vue.ref(null);
   var weather = Vue.ref(null);
+  var client = null;
+  var unsubscribe = null;
 
   var details = Vue.computed(() => {
     if (weather.value) {
@@ -20,30 +19,42 @@ function load_app () {
     }
   });
 
+  function on_next (msg) {
+    console.log(msg.data.track_location);
+    weather.value = msg.data.track_location;
+  }
+
+  function on_error (error) {
+    console.error(error);
+
+    if (unsubscribe) {
+      unsubscribe();
+      weather.value = null;
+      current_location.value = null;
+    }
+  }
+
+  function on_complete () {
+    console.log('Completed');
+  }
+
   function switch_locations (index) {
     var l = locations.value[index];
     current_location.value = l;
     weather.value = null;
-    ws.send(JSON.stringify({"location": l.location}));
-  }
 
-  ws.addEventListener("open", (event) => {
-    console.log("WebSocket opened");
-  });
-
-  ws.addEventListener("message", (msg) => {
-    var data = JSON.parse(msg.data);
-    if (data.weather) {
-      weather.value = data.weather;
-      console.log('Loaded Weather:', data.weather);
-    } else {
-      console.log('Unhandled Message:', data);
+    if (unsubscribe) {
+      unsubscribe();
     }
-  });
 
-  ws.addEventListener("close", (event) => {
-    console.log("WebSocket closed");
-  });
+    var url = location.origin.replace("http", "ws") + "/graphql";
+    client = graphqlWs.createClient({url});
+    var query = `subscription track {track_location(location: "${l.location[0]},${l.location[1]}")}`;
+    unsubscribe = client.subscribe(
+      {query},
+      {next: on_next, error: on_error, complete: on_complete}
+    );
+  }
 
   Vue.createApp({
     setup() {
