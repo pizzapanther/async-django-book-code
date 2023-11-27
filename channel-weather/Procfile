@@ -1,0 +1,2 @@
+web: PYTHONUNBUFFERED=true python manage.py runserver
+beat: PYTHONUNBUFFERED=true python manage.py beatserver
