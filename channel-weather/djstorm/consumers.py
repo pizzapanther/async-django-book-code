@@ -41,8 +41,20 @@ class WeatherConsumer(AsyncJsonWebsocketConsumer):
 
 class WeatherFetchConsumer(AsyncConsumer):
   async def fetch_all(self, message):
+    tasks = []
     for location in settings.WEATHER_LOCATIONS:
-      asyncio.create_task(self.fetch_weather(*location["location"]))
+      task = asyncio.create_task(self.fetch_weather(*location["location"]))
+      tasks.append(task)
+
+    # wait for tasks to complete
+    for task in tasks:
+      while 1:
+        if task.done():
+          break
+
+        await asyncio.sleep(0.3)
+
+    print('All fetches complete')
 
   async def fetch_weather(self, lat, lng):
     url = f"https://api.open-meteo.com/v1/forecast?latitude={lat}&longitude={lng}"
