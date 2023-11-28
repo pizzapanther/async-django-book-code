@@ -6,7 +6,6 @@ from django.conf import settings
 import httpx
 
 from channels.generic.websocket import AsyncJsonWebsocketConsumer, AsyncConsumer
-from channels.layers import get_channel_layer
 
 from djstorm.models import WeatherPoint
 
@@ -21,14 +20,17 @@ class WeatherConsumer(AsyncJsonWebsocketConsumer):
       await self.channel_layer.group_discard(self.current_location, self.channel_name)
 
   async def receive_json(self, data):
+    # current location discard
     if 'location' in data:
       if self.current_location:
         await self.channel_layer.group_discard(self.current_location, self.channel_name)
 
+      # setup new location
       self.current_location = "location_{}_{}".format(*data['location'])
       print('Joining:', self.current_location)
       await self.channel_layer.group_add(self.current_location, self.channel_name)
 
+      # send an initial data point
       point = "{},{}".format(*data['location'])
       wp = await WeatherPoint.objects.filter(point=point).afirst()
       if wp:
@@ -57,13 +59,17 @@ class WeatherFetchConsumer(AsyncConsumer):
     url += "&current=temperature_2m,apparent_temperature,is_day,weather_code,wind_speed_10m"
     url += "&temperature_unit=fahrenheit&wind_speed_unit=mph"
 
-    response = httpx.get(url)
-    data = response.json()
+    # fetch api data
+    async with httpx.AsyncClient() as client:
+      response = await client.get(url)
+      data = response.json()
 
+    # save to database
     wpoint = WeatherPoint(point=f"{lat},{lng}", weather_data=data)
     await wpoint.asave()
+
+    # send message to group
     group_name = f"location_{lat}_{lng}"
     message = json.dumps(data['current'])
-    channel_layer = get_channel_layer()
     print('Sending to', group_name, ':', data)
     await self.channel_layer.group_send(group_name, {"type": "receive.message", "message": message})
