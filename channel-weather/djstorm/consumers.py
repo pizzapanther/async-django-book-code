@@ -48,11 +48,7 @@ class WeatherFetchConsumer(AsyncConsumer):
 
     # wait for tasks to complete
     for task in tasks:
-      while 1:
-        if task.done():
-          break
-
-        await asyncio.sleep(0.3)
+      await task
 
     print('All fetches complete')
 
