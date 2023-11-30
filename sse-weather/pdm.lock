@@ -5,7 +5,7 @@
 groups = ["default"]
 strategy = ["cross_platform"]
 lock_version = "4.4"
-content_hash = "sha256:48646027976a43f431ca623571775355649735da0d59af360e1e65909551c06e"
+content_hash = "sha256:48a2ee102f08c697acc237d8ec30ea6b5a444126728ed661b850afa633e2e20e"
 
 [[package]]
 name = "amqp"
@@ -223,6 +223,16 @@ dependencies = [
 files = [
     {file = "Django-4.2.7-py3-none-any.whl", hash = "sha256:e1d37c51ad26186de355cbcec16613ebdabfa9689bbade9c538835205a8abbe9"},
     {file = "Django-4.2.7.tar.gz", hash = "sha256:8e0f1c2c2786b5c0e39fe1afce24c926040fad47c8ea8ad30aaf1188df29fc41"},
+]
+
+[[package]]
+name = "django-async-sse"
+version = "1.0.0"
+requires_python = ">=3.10"
+summary = "Django async Server Sent Events helpers"
+files = [
+    {file = "django_async_sse-1.0.0-py3-none-any.whl", hash = "sha256:7ccabba818a2495c547f3541f7b161b74a6e24126af2896030e7f779db30db29"},
+    {file = "django_async_sse-1.0.0.tar.gz", hash = "sha256:5fcc786ea76c6fbb34e3a88a8757c43e2cff528778e855c2d3085588994d7a01"},
 ]
 
 [[package]]

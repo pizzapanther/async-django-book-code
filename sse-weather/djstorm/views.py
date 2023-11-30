@@ -6,6 +6,8 @@ from django.template.response import TemplateResponse
 
 from djstorm.models import WeatherPoint
 
+from django_asse import SseStreamView, JsonEvent
+
 
 def locations(request):
   context = {
@@ -13,62 +15,19 @@ def locations(request):
   }
   return TemplateResponse(request, "djstorm-locations.html", context)
 
-import json
 
-from django.http import StreamingHttpResponse
-from django.views import View
-
-
-class SseStreamView(View):
-  SSE_CONTENT_TYPE = 'text/event-stream'
-  SSE_HEADERS = {
-    'Cache-Control': 'no-cache',
-    'Connection': 'keep-alive',
-  }
-
-  async def get(self, request, *args, **kwargs):
-    return StreamingHttpResponse(
-      (self._stream(request, *args, **kwargs)),
-      content_type=self.SSE_CONTENT_TYPE,
-      headers=self.SSE_HEADERS
-    )
-
-  def prepare_data(self, data):
-    return data
-
-  async def _stream(self, request, *args, **kwargs):
-    async for event in self.stream(request, *args, **kwargs):
-      if isinstance(event, dict):
-        event['data'] = self.prepare_data(event['data'])
-
-        if 'event' in event:
-          event_string = "event: {event}\ndata: {data}\n\n".format(**event)
-
-        else:
-          event_string = "data: {}\n\n".format(event['data'])
-
-      else:
-        event = self.prepare_data(event)
-        event_string = "data: {}\n\n".format(event)
-
-      yield event_string
-
-
-class JsonSseStreamView(SseStreamView):
-  def prepare_data(self, data):
-    return json.dumps(data)
-
-
-class WeatherStream(JsonSseStreamView):
+class WeatherStream(SseStreamView):
   async def stream(self, request, lat, lng):
     last_update = None
 
     while 1:
       wp = await WeatherPoint.objects.filter(point=f"{lat},{lng}").afirst()
 
-      print(wp.created, last_update)
       if wp and wp.created != last_update:
-        print(wp.weather_data['current'])
-        yield {'event': 'weather', 'data': wp.weather_data['current']}
+        event = JsonEvent(event='weather', data=wp.weather_data['current'])
+        last_update = wp.created
+        print(f'Sending:\n{event}')
+        yield event
 
-      await asyncio.sleep(60)
+      yield JsonEvent(event='ping', data=None)
+      await asyncio.sleep(30)

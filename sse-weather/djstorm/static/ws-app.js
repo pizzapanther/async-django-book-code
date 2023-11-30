@@ -32,6 +32,7 @@ function load_app () {
       event_source.close();
     }
 
+    // Start new SSE
     var url = `${location.origin}/weather/${l.location[0]},${l.location[1]}/`;
     event_source = new EventSource(url);
     event_source.addEventListener("weather", (msg) => {
