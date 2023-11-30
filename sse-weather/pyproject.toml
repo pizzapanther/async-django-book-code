@@ -1,0 +1,25 @@
+[project]
+name = ""
+version = ""
+description = ""
+authors = [
+    {name = "Paul Bailey", email = "paul@neutron.studio"},
+]
+dependencies = [
+    "django>=4.2.7",
+    "celery>=5.3.4",
+    "redis>=5.0.1",
+    "dj-database-url>=2.1.0",
+    "httpx>=0.25.1",
+    "honcho>=1.1.0",
+    "setuptools>=68.2.2",
+    "psycopg[binary,pool]>=3.1.13",
+    "daphne>=4.0.0",
+    "sseclient>=0.0.27",
+]
+requires-python = ">=3.11"
+readme = "README.md"
+license = {text = "BSDv3"}
+
+[tool.pdm.scripts]
+_.env_file = ".env"

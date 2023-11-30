@@ -1,0 +1,67 @@
+<!DOCTYPE html>{% load static %}
+<html>
+  <head>
+    <title>WebSocket Weather</title>
+    <link rel="stylesheet" href="{% static 'wicons/css/weather-icons.min.css' %}">
+    <style>
+      li {
+        font-size: 150%;
+        font-weight: bold;
+      }
+
+      .weather {
+        font-size: 150%;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Weather Locations</h1>
+    {% verbatim %}
+    <div id="app">
+      <ul>
+        <li v-for="(l, i) in locations">
+          <a href="" @click.stop.prevent="switch_locations(i)">
+            {{ l.name }}
+          </a>
+          <br><br>
+        </li>
+      </ul>
+      <div v-if="current_location">
+        <hr>
+        <h2>Realtime Weather: {{ current_location.name }}</h2>
+        <div class="weather" v-if="details">
+          <table>
+            <tr>
+              <td colspan="2" style="text-align: center;">
+                <i :class="['wi', details.icon]"></i>
+                <br>
+                {{ details.label }}
+                <br><br>
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Temp:</strong></td>
+              <td>
+                {{ weather.temperature_2m }}&deg;F
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Wind Speed:</strong></td>
+              <td>{{ weather.wind_speed_10m }}mph</td>
+            </tr>
+            <tr>
+              <td><strong>Updated:</strong></td>
+              <td>{{ weather.time }}</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+    </div>
+    {% endverbatim %}
+    {{ locations|json_script:"locations" }}
+    <script src="https://cdn.jsdelivr.net/npm/vue@3.3.8/dist/vue.global.min.js"></script>
+    <script src="{% static 'weather-mapping.js' %}"></script>
+    <script src="{% static 'ws-app.js' %}"></script>
+  </body>
+</html>
