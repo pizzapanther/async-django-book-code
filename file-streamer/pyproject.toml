@@ -1,0 +1,18 @@
+[project]
+name = ""
+version = ""
+description = ""
+authors = [
+    {name = "Paul Bailey", email = "paul@neutron.studio"},
+]
+dependencies = [
+    "django>=4.2.7",
+    "honcho>=1.1.0",
+    "setuptools>=69.0.2",
+    "uvicorn[standard]>=0.24.0.post1",
+    "whitenoise>=6.6.0",
+]
+requires-python = ">=3.11"
+readme = "README.md"
+license = {text = "BSD-3Clause"}
+
