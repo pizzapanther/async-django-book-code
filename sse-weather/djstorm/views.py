@@ -66,7 +66,9 @@ class WeatherStream(JsonSseStreamView):
     while 1:
       wp = await WeatherPoint.objects.filter(point=f"{lat},{lng}").afirst()
 
+      print(wp.created, last_update)
       if wp and wp.created != last_update:
+        print(wp.weather_data['current'])
         yield {'event': 'weather', 'data': wp.weather_data['current']}
 
       await asyncio.sleep(60)
