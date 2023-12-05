@@ -1,1 +1,1 @@
-web: PYTHONUNBUFFERED=true uvicorn fstream.asgi:application --reload --loop uvloop
+web: PYTHONUNBUFFERED=true uvicorn fstream.asgi:application --loop uvloop

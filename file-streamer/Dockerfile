@@ -11,7 +11,7 @@ RUN mkdir -p /app
 RUN chown -R asyncdj:asyncdj /app
 WORKDIR /app
 
-RUN install_packages python3-full pipx aria2 wget
+RUN install_packages python3-full pipx aria2
 
 USER asyncdj
 ENV HOME /home/asyncdj

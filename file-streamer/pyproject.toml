@@ -11,6 +11,8 @@ dependencies = [
     "setuptools>=69.0.2",
     "uvicorn[standard]>=0.24.0.post1",
     "whitenoise>=6.6.0",
+    "aiofiles>=23.2.1",
+    "httpx>=0.25.2",
 ]
 requires-python = ">=3.11"
 readme = "README.md"
