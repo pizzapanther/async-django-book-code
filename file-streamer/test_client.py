@@ -10,6 +10,11 @@ def run_tests (video_url="http://localhost:8000/video", content_length=121283919
   assert len(resp.content) == content_length
   assert resp.status_code == 200
 
+  resp = httpx.head(video_url)
+  print('Head Test')
+  assert resp.headers['Content-Length'] == str(content_length)
+  assert resp.status_code == 200
+
   resp = httpx.get(video_url, headers={'Range': 'bytes=0-5000'})
   print('Chunk Test:', len(resp.content), 5001)
   assert len(resp.content) == 5001
