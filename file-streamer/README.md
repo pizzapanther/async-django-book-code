@@ -13,6 +13,9 @@ docker compose run django /bin/bash
 pdm install
 pdm manage migrate
 
+# Download the Video File
+aria2c -o files/bunny.m4v https://download.blender.org/peach/bigbuckbunny_movies/BigBuckBunny_640x360.m4v
+
 # Run the fullstack
 pdm run honcho start
 ```
