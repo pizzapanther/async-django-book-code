@@ -17,11 +17,13 @@ def locations(request):
 
 @csrf_exempt
 async def weather_stream(request, lat, lng):
-  wait = request.POST.get('wait')
+  last_id = request.POST.get('last_id')
 
-  if wait:
-    print('Long Poll Started')
-    await asyncio.sleep(30)
+  while 1:
+    wp = await WeatherPoint.objects.filter(point=f"{lat},{lng}").afirst()
+    if last_id and wp and str(wp.id) == last_id:
+      print('No New Data, Sleeping ...')
+      await asyncio.sleep(30)
+      continue
 
-  wp = await WeatherPoint.objects.filter(point=f"{lat},{lng}").afirst()
-  return http.JsonResponse(wp.weather_data['current'])
+    return http.JsonResponse({'id': wp.id, 'weather': wp.weather_data['current']})

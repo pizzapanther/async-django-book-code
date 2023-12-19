@@ -20,7 +20,7 @@ app.autodiscover_tasks()
 app.conf.beat_schedule = {
   'add-every-15-minutes': {
     'task': 'djstorm.tasks.fetch_all',
-    'schedule': crontab(minute='0,15,30,45'),
+    'schedule': crontab(minute='0,5,10,15,20,25,30,35,40,45,50,55'),
   },
 }
 

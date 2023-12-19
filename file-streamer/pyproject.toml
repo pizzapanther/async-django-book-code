@@ -6,13 +6,12 @@ authors = [
     {name = "Paul Bailey", email = "paul@neutron.studio"},
 ]
 dependencies = [
-    "django>=4.2.7",
+    "django>=5.0",
     "honcho>=1.1.0",
     "setuptools>=69.0.2",
-    "uvicorn[standard]>=0.24.0.post1",
-    "whitenoise>=6.6.0",
     "aiofiles>=23.2.1",
     "httpx>=0.25.2",
+    "uvicorn[standard]>=0.24.0.post1",
 ]
 requires-python = ">=3.11"
 readme = "README.md"

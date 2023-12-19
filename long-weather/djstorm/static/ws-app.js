@@ -4,7 +4,6 @@ function load_app () {
   var poll_url;
   var config = {headers: {'Content-Type': 'application/x-www-form-urlencoded'}};
 
-  var event_source = null;
   var current_location = Vue.ref(null);
   var details = Vue.ref(null);
   var weather = Vue.ref(null);
@@ -20,19 +19,10 @@ function load_app () {
     }
   });
 
-  function set_weather(msg) {
-    var data = JSON.parse(msg.data);
-    weather.value = data.weather;
-  }
-
   function switch_locations (index) {
     var l = locations.value[index];
     current_location.value = l;
     weather.value = null;
-
-    if (event_source) {
-      event_source.close();
-    }
 
     // Start Polling
     poll_url = `${location.origin}/weather/${l.location[0]},${l.location[1]}/`;
@@ -42,20 +32,14 @@ function load_app () {
         alert("Error retrieving weather");
         console.error(e);
       });
-    // event_source = new EventSource(url);
-    // event_source.addEventListener("weather", (msg) => {
-    //   var data = JSON.parse(msg.data)
-    //   console.log("Received:", Date.now(), data);
-    //   weather.value = data;
-    // });
   }
 
   function receive_data (response) {
     if (response.config.url == poll_url) {
       console.log("Received:", Date.now(), response.data);
-      weather.value = response.data;
+      weather.value = response.data.weather;
 
-      axios.post(poll_url, {wait: 1}, config)
+      axios.post(poll_url, {last_id: response.data.id}, config)
         .then(receive_data)
         .catch((e) => {
           alert("Error retrieving weather");
