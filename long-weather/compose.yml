@@ -1,0 +1,29 @@
+version: "3.9"
+
+services:
+    django:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        command: /bin/bash
+        volumes:
+            - .:/app
+        network_mode: host
+        depends_on:
+            - redis
+            - postgresql
+        shm_size: 4gb
+    redis:
+        image: 'bitnami/redis:latest'
+        network_mode: host
+        environment:
+            - ALLOW_EMPTY_PASSWORD=yes
+    postgresql:
+        image: postgis/postgis:15-master
+        network_mode: host
+        volumes:
+            - "$HOME/pgdata/long-weather:/var/lib/postgresql/data"
+        environment:
+            - POSTGRES_DB=asyncdj
+            - POSTGRES_USER=postgres
+            - POSTGRES_PASSWORD=passyword

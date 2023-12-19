@@ -1,0 +1,3 @@
+web: PYTHONUNBUFFERED=true pdm manage runserver
+worker: PYTHONUNBUFFERED=true celery -A cweather worker -l INFO -c 3
+beat: PYTHONUNBUFFERED=true celery -A cweather beat -l INFO
