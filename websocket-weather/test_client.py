@@ -17,7 +17,7 @@ async def run_tests(location=[29.89,-98.25]):
         print(datetime.datetime.now(), message)
 
     except websockets.ConnectionClosed:
-      restart = input('Restart [y/n]?')
+      restart = input('Restart [y/n]? ')
       if restart.lower() == 'y':
         continue
 
