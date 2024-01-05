@@ -1,12 +1,17 @@
 #!/usr/bin/env python3
 
-from sseclient import SSEClient
+import asyncio
+import datetime
 
-def run():
-  messages = SSEClient('http://localhost:8000/weather/52.13,13.14/')
-  for msg in messages:
-    print(msg)
+from aiohttp_sse_client2 import client as sse_client
+
+async def run_tests(location='52.13,13.14'):
+  url = f'http://localhost:8000/weather/{location}/'
+  async with sse_client.EventSource(url) as event_source:
+    async for event in event_source:
+      print(datetime.datetime.now(), f"Event:{event.type}", event.data)
+
 
 if __name__ == "__main__":
-  run()
+  asyncio.run(run_tests())
 

@@ -20,6 +20,7 @@ dependencies = [
     "django-filter>=23.4",
     "django-ws>=1.0.0",
     "graphene-luna>=1.0.0",
+    "gql[all]==3.5.0",
 ]
 requires-python = ">=3.11"
 readme = "README.md"
@@ -27,3 +28,6 @@ license = {text = "BSDv3"}
 
 [tool.pdm.scripts]
 _.env_file = ".env"
+
+[tool.pdm.resolution.overrides]
+websockets = "12.0"

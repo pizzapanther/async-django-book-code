@@ -14,10 +14,10 @@ dependencies = [
     "honcho>=1.1.0",
     "setuptools>=68.2.2",
     "psycopg[binary,pool]>=3.1.13",
-    "sseclient>=0.0.27",
     "uvicorn[standard]>=0.24.0.post1",
     "whitenoise>=6.6.0",
     "django-async-sse>=1.0.0",
+    "aiohttp-sse-client2>=0.3.0",
 ]
 requires-python = ">=3.11"
 readme = "README.md"
