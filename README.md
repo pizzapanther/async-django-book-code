@@ -31,7 +31,7 @@ pdm run honcho start
 - Celery Weather<br>
 **Description:** Implementation of Celery for fetching weather forecasts asynchronously. Implemented with a RabbitMQ broker and a Redis broker.<br>
 **Project:** [celery-weather-rabbitmq](celery-weather-rabbitmq)<br>
-**Project:** [celery-weather-redis](celery-weather-redis)
+**Project:** [celery-weather-redis](celery-weather-redis)<br>
 - Django Channel Weather<br>
 **Description:** Weather application using [Django Channels](https://channels.readthedocs.io/) and WebSockets.<br>
 **Project:** [channel-weather](channel-weather)
