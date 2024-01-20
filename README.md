@@ -44,6 +44,9 @@ pdm run honcho start
 - **Long Polling Weather**<br>
 **Description:** Weather application that uses [Long Polling](https://javascript.info/long-polling).<br>
 **Project:** [long-weather](long-weather)<br><br>
+- **Pusher Weather**<br>
+**Description:** Weather application that uses the [Pusher Service](https://pusher.com/).<br>
+**Project:** [pusher-weather](pusher-weather)<br><br>
 - **SSE Weather**<br>
 **Description:** Weather application that uses [Server Sent Events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events).<br>
 **Project:** [sse-weather](sse-weather)<br><br>
