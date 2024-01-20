@@ -28,25 +28,25 @@ pdm run honcho start
 
 ## Included Projects
 
-- #### Celery Weather<br>
+- **Celery Weather**<br>
 **Description:** Implementation of Celery for fetching weather forecasts asynchronously. Implemented with a RabbitMQ broker and a Redis broker.<br>
 **Project:** [celery-weather-rabbitmq](celery-weather-rabbitmq)<br>
 **Project:** [celery-weather-redis](celery-weather-redis)<br><br>
-- Django Channel Weather<br>
+- **Django Channel Weather**<br>
 **Description:** Weather application using [Django Channels](https://channels.readthedocs.io/) and WebSockets.<br>
 **Project:** [channel-weather](channel-weather)<br><br>
-- File Streamer<br>
+- **File Streamer**<br>
 **Description:** Large file streaming application using asynchronous `StreamingHttpResponse`. Implements [HTTP Range Requests](https://developer.mozilla.org/en-US/docs/Web/HTTP/Range_requests).<br>
 **Project:** [file-streamer](file-streamer)<br><br>
-- GraphQL Subscription Weather<br>
+- **GraphQL Subscription Weather**<br>
 **Description:** Weather application using [Graphene](https://graphene-python.org/) and GraphQL Subscriptions over a WebSocket.<br>
 **Project:** [gql-weather](gql-weather)<br><br>
-- Long Polling Weather<br>
+- **Long Polling Weather**<br>
 **Description:** Weather application that uses [Long Polling](https://javascript.info/long-polling).<br>
 **Project:** [long-weather](long-weather)<br><br>
-- SSE Weather<br>
+- **SSE Weather**<br>
 **Description:** Weather application that uses [Server Sent Events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events).<br>
 **Project:** [sse-weather](sse-weather)<br><br>
-- WebSocket Weather<br>
+- **WebSocket Weather**<br>
 **Description:** Weather application using [WebSockets](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API).<br>
 **Project:** [websocket-weather](websocket-weather)
