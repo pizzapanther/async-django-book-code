@@ -30,19 +30,23 @@ pdm run honcho start
 
 - Celery Weather<br>
 Implementation of Celery for fetching weather forecasts asynchronously. Implemented with a RabbitMQ broker and a Redis broker.
-  - Project: [celery-weather-rabbitmq](celery-weather-rabbitmq)
-  - Project: [celery-weather-redis](celery-weather-redis)
+  - **Project:** [celery-weather-rabbitmq](celery-weather-rabbitmq)
+  - **Project:** [celery-weather-redis](celery-weather-redis)
 - Django Channel Weather<br>
 Weather application using [Django Channels](https://channels.readthedocs.io/) and WebSockets.<br>
-Project: [channel-weather](channel-weather)
+**Project:** [channel-weather](channel-weather)
 - File Streamer<br>
 Large file streaming application using asynchronous `StreamingHttpResponse`. Implements [HTTP Range Requests](https://developer.mozilla.org/en-US/docs/Web/HTTP/Range_requests).<br>
-Project: [file-streamer](file-streamer)
-- GraphQL Subscription Weather - [gql-weather](gql-weather)<br>
-Weather application using [Graphene](https://graphene-python.org/) and GraphQL Subscriptions over a WebSocket.
-- Long Polling Weather - [long-weather](long-weather)<br>
-Weather application that uses [Long Polling](https://javascript.info/long-polling).
-- SSE Weather - [sse-weather](sse-weather)<br>
-Weather application that uses [Server Sent Events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events).
-- WebSocket Weather - [websocket-weather](websocket-weather)<br>
-Weather application using [WebSockets](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API).
+**Project:** [file-streamer](file-streamer)
+- GraphQL Subscription Weather<br>
+Weather application using [Graphene](https://graphene-python.org/) and GraphQL Subscriptions over a WebSocket.<br>
+**Project:** [gql-weather](gql-weather)
+- Long Polling Weather<br>
+Weather application that uses [Long Polling](https://javascript.info/long-polling).<br>
+**Project:** [long-weather](long-weather)
+- SSE Weather<br>
+Weather application that uses [Server Sent Events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events).<br>
+**Project:** [sse-weather](sse-weather)
+- WebSocket Weather<br>
+Weather application using [WebSockets](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API).<br>
+**Project:** [websocket-weather](websocket-weather)
