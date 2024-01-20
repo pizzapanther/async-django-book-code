@@ -2,6 +2,7 @@ import os
 
 from celery import Celery
 from celery.schedules import crontab
+from celery.signals import beat_init
 
 # Set the default Django settings module for the 'celery' program.
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'cweather.settings')
@@ -27,3 +28,8 @@ app.conf.beat_schedule = {
 @app.task(bind=True, ignore_result=True)
 def debug_task(self):
   print(f'Request: {self.request!r}')
+
+@beat_init.connect
+def at_start(sender, **kwargs):
+  from djstorm.tasks import fetch_all
+  fetch_all.delay()
