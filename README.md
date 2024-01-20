@@ -30,11 +30,12 @@ pdm run honcho start
 
 - Celery Weather<br>
 Implementation of Celery for fetching weather forecasts asynchronously. Implemented with a RabbitMQ broker and a Redis broker.
-  - [celery-weather-rabbitmq](celery-weather-rabbitmq)
-  - [celery-weather-redis](celery-weather-redis)
-- Django Channel Weather - [channel-weather](channel-weather)<br>
+  - Project: [celery-weather-rabbitmq](celery-weather-rabbitmq)
+  - Project: [celery-weather-redis](celery-weather-redis)
+- Django Channel Weather - Project: [channel-weather](channel-weather)<br>
 Weather application using [Django Channels](https://channels.readthedocs.io/) and WebSockets.
-- File Streamer - [file-streamer](file-streamer)<br>
+- File Streamer<br>
+[file-streamer](file-streamer)<br>
 Large file streaming application using asynchronous `StreamingHttpResponse`. Implements [HTTP Range Requests](https://developer.mozilla.org/en-US/docs/Web/HTTP/Range_requests).
 - GraphQL Subscription Weather - [gql-weather](gql-weather)<br>
 Weather application using [Graphene](https://graphene-python.org/) and GraphQL Subscriptions over a WebSocket.
