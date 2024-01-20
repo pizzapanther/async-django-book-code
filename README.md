@@ -28,7 +28,7 @@ pdm run honcho start
 
 ## Included Projects
 
-- Celery Weather<br>
+- #### Celery Weather<br>
 **Description:** Implementation of Celery for fetching weather forecasts asynchronously. Implemented with a RabbitMQ broker and a Redis broker.<br>
 **Project:** [celery-weather-rabbitmq](celery-weather-rabbitmq)<br>
 **Project:** [celery-weather-redis](celery-weather-redis)<br><br>
