@@ -6,7 +6,7 @@ Purchase the book at: [www.asyncdjango.com](https://www.asyncdjango.com)
 
 ## How to Use This Code
 
-Note, the included Docker Compose files work best with Docker Engine on the command line and not Docker Desktop. Docker Engine is freely installable on Linux, and Mac via Brew. On Windows it is recommended to use Docker Engine within WSL (Windows Subsystem for Linux) and your favorite Linux distro.
+Note, the included Docker Compose files work best with Docker Engine or Docker Desktop CLI.
 
 ```bash
 # Enter project directory

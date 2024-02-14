@@ -1,3 +1,3 @@
-web: PYTHONUNBUFFERED=true uvicorn cweather.asgi:application --reload --loop uvloop
+web: PYTHONUNBUFFERED=true uvicorn cweather.asgi:application --reload --loop uvloop --host 0.0.0.0
 worker: PYTHONUNBUFFERED=true celery -A cweather worker -l INFO -c 3
 beat: PYTHONUNBUFFERED=true celery -A cweather beat -l INFO
