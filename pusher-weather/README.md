@@ -18,7 +18,7 @@ Then use the container like shown below.
 docker compose build --build-arg userid=$(id -u) --build-arg groupid=$(id -g)
 
 # Enter container
-docker compose run django /bin/bash
+docker compose run -p 8000:8000 django /bin/bash
 
 # Install Django and other dependencies
 pdm install
