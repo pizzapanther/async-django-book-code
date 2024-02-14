@@ -6,7 +6,7 @@ Purchase the book at: [www.asyncdjango.com](https://www.asyncdjango.com)
 
 ## How to Use This Code
 
-Note, the included Docker Compose files work best with Docker Engine or Docker Desktop CLI.
+Note, the included Docker Compose files work with Docker Engine or Docker Desktop CLI.
 
 ```bash
 # Enter project directory
