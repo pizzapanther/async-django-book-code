@@ -8,19 +8,22 @@ services:
         command: /bin/bash
         volumes:
             - .:/app
-        network_mode: host
+        ports:
+          - 8000:8000
         depends_on:
             - redis
             - postgresql
         shm_size: 4gb
     redis:
         image: 'bitnami/redis:latest'
-        network_mode: host
+        ports:
+          - 6379
         environment:
             - ALLOW_EMPTY_PASSWORD=yes
     postgresql:
         image: postgis/postgis:15-master
-        network_mode: host
+        ports:
+          - 5432
         volumes:
             - "$HOME/pgdata/celery-weather-redis:/var/lib/postgresql/data"
         environment:
