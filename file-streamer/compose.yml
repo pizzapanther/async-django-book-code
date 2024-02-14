@@ -8,5 +8,6 @@ services:
         command: /bin/bash
         volumes:
             - .:/app
-        network_mode: host
+        ports:
+          - 8000:8000
         shm_size: 4gb

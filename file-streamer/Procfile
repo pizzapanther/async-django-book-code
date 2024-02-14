@@ -1,1 +1,1 @@
-web: PYTHONUNBUFFERED=true uvicorn fstream.asgi:application --loop uvloop
+web: PYTHONUNBUFFERED=true uvicorn fstream.asgi:application --loop uvloop --host 0.0.0.0
