@@ -78,7 +78,7 @@ WSGI_APPLICATION = 'cweather.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    'default': dj_database_url.config(default='postgres://postgres:passyword@localhost:5432/asyncdj')
+    'default': dj_database_url.config(default='postgres://postgres:passyword@postgresql:5432/asyncdj')
 }
 
 
@@ -123,11 +123,11 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-CELERY_RESULT_BACKEND = os.environ.get("RESULTS_URL", "rpc://bugs:passyword@localhost:5672/asyncdj")
+CELERY_RESULT_BACKEND = os.environ.get("RESULTS_URL", "rpc://bugs:passyword@rabbitmq:5672/asyncdj")
 CELERY_RESULT_EXTENDED = True
 
 CELERY_TIMEZONE = "UTC"
 CELERY_TASK_TRACK_STARTED = True
 CELERY_TASK_TIME_LIMIT = 60
 
-CELERY_BROKER_URL = os.environ.get("BROKER_URL", "amqp://bugs:passyword@localhost:5672/asyncdj")
+CELERY_BROKER_URL = os.environ.get("BROKER_URL", "amqp://bugs:passyword@rabbitmq:5672/asyncdj")

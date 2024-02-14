@@ -8,21 +8,24 @@ services:
         command: /bin/bash
         volumes:
             - .:/app
-        network_mode: host
+        ports:
+          - 8000:8000
         depends_on:
             - rabbitmq
             - postgresql
         shm_size: 4gb
     rabbitmq:
-        image: 'bitnami/rabbitmq:latest'
-        network_mode: host
+        image: rabbitmq:3.12
+        ports:
+          - 5672
         environment:
-            - RABBITMQ_VHOST=asyncdj
-            - RABBITMQ_USERNAME=bugs
-            - RABBITMQ_PASSWORD=passyword
+            - RABBITMQ_DEFAULT_USER=bugs
+            - RABBITMQ_DEFAULT_PASS=passyword
+            - RABBITMQ_DEFAULT_VHOST=asyncdj
     postgresql:
         image: postgis/postgis:15-master
-        network_mode: host
+        ports:
+          - 5432
         volumes:
             - "$HOME/pgdata/celery-weather-rabbitmq:/var/lib/postgresql/data"
         environment:
