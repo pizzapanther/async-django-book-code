@@ -26,4 +26,5 @@ async def weather_stream(request, lat, lng):
       await asyncio.sleep(30)
       continue
 
+    print('Sending Data')
     return http.JsonResponse({'id': wp.id, 'weather': wp.weather_data['current']})
