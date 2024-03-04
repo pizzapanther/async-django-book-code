@@ -26,7 +26,7 @@ class WeatherSubscription:
     while 1:
       wp = await WeatherPoint.objects.filter(point=location).afirst()
       if wp:
-        print("SENIDNG", wp.weather_data['current'])
+        print("SENDING", wp.weather_data['current'])
         yield wp.weather_data['current']
 
       await asyncio.sleep(30)

@@ -28,7 +28,7 @@ class WeatherSocket(WebSocketHandler):
     if self.current_location:
       wp = await WeatherPoint.objects.filter(point=self.current_location).afirst()
       if wp:
-        print("SENIDNG", wp.weather_data['current'])
+        print("SENDING", wp.weather_data['current'])
         await self.send({"weather": wp.weather_data['current']})
 
   async def send_weather(self):
