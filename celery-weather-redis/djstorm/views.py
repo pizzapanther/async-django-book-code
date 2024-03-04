@@ -20,4 +20,5 @@ def current_weather(request, lat, lng):
     print("Using Model Data")
     data = wp.weather_data
 
+  data["current"]["app"] = "Celery Weather - Redis"
   return http.JsonResponse(data["current"])
