@@ -1,0 +1,10 @@
+#!/bin/bash
+
+user=`id -nu $1`
+export HOME=/home/$user
+pipx ensurepath
+pipx install pdm
+pipx inject pdm pdm-django
+
+ln -s /app/.bash_history /home/$user/.bash_history
+ln -s /app/.python_history /home/$user/.python_history
