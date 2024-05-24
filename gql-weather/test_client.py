@@ -13,7 +13,7 @@ QUERY_TEMPLATE = """
 """
 
 async def run_tests(location="29.89,-98.25"):
-  transport = WebsocketsTransport(url='ws://localhost:8000/graphql')
+  transport = WebsocketsTransport(url='ws://172.17.0.1:8000/graphql')
 
   client = Client(transport=transport, fetch_schema_from_transport=False)
   query = QUERY_TEMPLATE.replace("{location}", location)

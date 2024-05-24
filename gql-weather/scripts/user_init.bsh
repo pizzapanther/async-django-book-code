@@ -1,0 +1,12 @@
+#!/bin/bash
+
+if id "$1" >/dev/null 2>&1; then
+  echo "user found";
+  user=`id -nu $1`;
+else
+  echo "user not found";
+  useradd -ms /bin/bash -u $1 -g $2 asyncdj;
+  user=asyncdj;
+fi
+
+echo "$user ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
