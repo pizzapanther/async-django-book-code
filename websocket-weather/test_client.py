@@ -8,7 +8,7 @@ import websockets
 
 
 async def run_tests(location=[29.89,-98.25]):
-  async for websocket in websockets.connect('ws://localhost:8000/ws'):
+  async for websocket in websockets.connect('ws://172.17.0.1:8000/ws'):
     try:
       data = json.dumps({"location": location})
       await websocket.send(data)
