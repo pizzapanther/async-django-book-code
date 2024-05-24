@@ -3,7 +3,7 @@
 import httpx
 
 
-def run_tests (video_url="http://localhost:8000/video", content_length=121283919):
+def run_tests (video_url="http://172.17.0.1:8000/video", content_length=121283919):
   resp = httpx.get(video_url)
   print('Full Length Test:', len(resp.content), content_length)
   assert resp.headers['Content-Length'] == str(content_length)

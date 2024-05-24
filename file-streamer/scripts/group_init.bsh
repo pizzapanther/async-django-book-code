@@ -1,0 +1,8 @@
+#!/bin/bash
+
+if [ $(getent group $1) ]; then
+  echo "group $1 exists.";
+else
+  echo "group $1 does not exist.";
+  addgroup asyncdj --gid $groupid;
+fi
